@@ -7,7 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StringCalculationServices\Benchmark.Services.csproj" />
+    <Compile Remove="Benchmark.Services\**" />
+    <Compile Remove="Benchmark.Tests\**" />
+    <Content Remove="Benchmark.Services\**" />
+    <Content Remove="Benchmark.Tests\**" />
+    <EmbeddedResource Remove="Benchmark.Services\**" />
+    <EmbeddedResource Remove="Benchmark.Tests\**" />
+    <None Remove="Benchmark.Services\**" />
+    <None Remove="Benchmark.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Benchmark.Services\Benchmark.Services.csproj" />
   </ItemGroup>
 
 </Project>
