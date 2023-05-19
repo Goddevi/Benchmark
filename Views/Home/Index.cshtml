@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model StringCalculatorViewModel
+
+@if(Model.Output == null)
+{
+    <div class="input-form form-group">
+        @using( Html.BeginForm("Index","Home",FormMethod.Post))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @Html.TextBoxFor(x=>x.Input, new { @class = "form-control"});
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+}else{
+    <div class="result">
+        @Model.Output
+    </div>
+}
