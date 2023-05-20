@@ -1,29 +1,40 @@
-﻿using Benchmark.Services.Helpers;
+﻿using Benchmark.Services;
+
 using Benchmark.Services.Interfaces;
+using System.Globalization;
 
 namespace Benchmark.Services
 {
+
+    
     public class StringCalculationService : IStringCalculationService
     {
-        public override int Add(string numbers)
+        private readonly ISplitter _splitter;
+
+        public StringCalculationService(ISplitter splitter)
         {
-            var runningTotal = 0;
-            if (numbers == "")
+            _splitter = splitter;
+        }
+
+        public int Add(string numbers)
+        {
+            if (string.IsNullOrWhiteSpace(numbers))
                 return 0;
 
-            if (!numbers.Contains(','))
-            {
-                return numbers.TryConvertStringToInt32();
-            }
-            //max length of array ~2billion
-            var numbersArray = numbers.Split(',');
+            var numbersArray = _splitter.Split(numbers);
+            var runningTotal = 0;
 
             foreach (var number in numbersArray)
             {
-                runningTotal += number.TryConvertStringToInt32();
+                if (int.TryParse(number, out var convertedNumber))
+                {
+                    runningTotal += convertedNumber;
+                }
             }
 
             return runningTotal;
         }
     }
 }
+
+ 

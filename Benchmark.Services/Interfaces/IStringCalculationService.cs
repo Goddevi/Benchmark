@@ -1,9 +1,9 @@
 ﻿
 namespace Benchmark.Services.Interfaces
 {
-    public abstract class IStringCalculationService
+    public interface IStringCalculationService
     {
-        public abstract int Add(string numbers);
+        public int Add(string numbers);
      
     }
 }
