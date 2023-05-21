@@ -29,7 +29,7 @@ public class CustomDelimiterNumberParser : DefaultNumberParser
             string delimiter = input.Substring(delimiterSignifier.Length, delimiterEndIndex - 2);
             string numbersWithoutDelimiter = input.Substring(delimiterEndIndex + 1);
 
-            var parsedNumbers = numbersWithoutDelimiter.Split(new string[] { delimiter, "\n" }, StringSplitOptions.RemoveEmptyEntries)
+            var parsedNumbers = numbersWithoutDelimiter.Split(new string[] { delimiter}, StringSplitOptions.RemoveEmptyEntries)
                                           .Select(x => int.TryParse(x, NumberStyles.Integer, null, out int result) ? result : 0)
                                           .ToArray();
             if(!_allowNegatives)
