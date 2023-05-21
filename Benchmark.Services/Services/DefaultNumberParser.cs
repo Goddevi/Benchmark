@@ -2,6 +2,7 @@
 
 using Benchmark.Services.Interfaces;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Benchmark.Services
 {
@@ -14,7 +15,7 @@ namespace Benchmark.Services
             var parsedNumbers = input.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => int.TryParse(x, NumberStyles.Integer, null, out int result) ? result : 0)
                         .ToArray();
-            HandleNegativeNumbers(parsedNumbers);
+           
             return parsedNumbers;  
 
         }
@@ -28,6 +29,10 @@ namespace Benchmark.Services
                 throw new ArgumentException($"Negatives are not allowed: {string.Join(", ", negativeNumbers)}");
             }
         }
+
+        protected virtual int[] HandleNumbersGreaterThan1000(int[]numbers)
+        {
+            return numbers.Where(x => x <= 1000).ToArray();        }
     }
 
 }

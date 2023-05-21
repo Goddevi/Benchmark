@@ -31,7 +31,7 @@ namespace Benchmark.Controllers
 
             string sanitizedInput = Regex.Replace(viewModel.Input, "[\r]", string.Empty);
 
-            INumberParser numberParser = new CustomDelimiterNumberParser();
+            INumberParser numberParser = new CustomDelimiterNumberParser(false,false);
            viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
 
             return View(viewModel);

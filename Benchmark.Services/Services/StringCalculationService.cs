@@ -38,15 +38,13 @@ namespace Benchmark.Services
       
         public int Add(string numbers, INumberParser numberParser)
         {
-            if (string.IsNullOrWhiteSpace(numbers))
-                return 0;
-
+          
             var numbersArray = numberParser.ParseNumbers(numbers);
             var runningTotal = 0;
 
             foreach (var number in numbersArray)
             {              
-                    runningTotal += number;  
+                    runningTotal += number <=1000 ? number : 0;  
             }
 
             return runningTotal;

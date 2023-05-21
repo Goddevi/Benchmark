@@ -13,6 +13,10 @@ namespace Benchmark.Tests.Services
             {
                 HandleNegativeNumbers(numbers);
             }
+            public int[] TestHandleNumbersGreaterThan1000(int[] numbers)
+            {
+               return HandleNumbersGreaterThan1000(numbers);
+            }
         }
 
         [TestInitialize]
@@ -123,5 +127,49 @@ namespace Benchmark.Tests.Services
                 Assert.AreEqual("Negatives are not allowed: -2, -4", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void HandleNumbersGreaterThan1000_NoNumbers_ReturnsEmptyArray()
+        {
+            // Arrange
+            int[] numbers = { };
+            var customNumberParser = new CustomNumberParser();
+
+            // Act
+            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+
+            // Assert
+            Assert.AreEqual(0, result.Length);
+        }
+
+        [TestMethod]
+        public void HandleNumbersGreaterThan1000_NumbersLessThanOrEqualTo1000_ReturnsSameArray()
+        {
+            // Arrange
+            int[] numbers = { 1, 500, 1000 };
+            var customNumberParser = new CustomNumberParser();
+
+            // Act
+            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+
+            // Assert
+            CollectionAssert.AreEqual(numbers, result);
+        }
+
+        [TestMethod]
+        public void HandleNumbersGreaterThan1000_NumbersGreaterThan1000_ReturnsFilteredArray()
+        {
+            // Arrange
+            int[] numbers = { 500, 2000, 1001, 3000, 1000 };
+            int[] expected = { 500,1000 };
+            var customNumberParser = new CustomNumberParser();
+
+            // Act
+            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+
+            // Assert
+            CollectionAssert.AreEqual(expected, result);
+        }
+
     }
 }
