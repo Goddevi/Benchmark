@@ -11,9 +11,22 @@ namespace Benchmark.Services
         {
             if(input == null)
                 return new int[0]; 
-            return input.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+            var parsedNumbers = input.Split(new string[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => int.TryParse(x, NumberStyles.Integer, null, out int result) ? result : 0)
                         .ToArray();
+            HandleNegativeNumbers(parsedNumbers);
+            return parsedNumbers;  
+
+        }
+
+
+        protected virtual void HandleNegativeNumbers(int[] numbers)
+        {
+            var negativeNumbers = numbers.Where(n => n < 0).ToArray();
+            if (negativeNumbers.Length > 0)
+            {
+                throw new ArgumentException($"Negatives are not allowed: {string.Join(", ", negativeNumbers)}");
+            }
         }
     }
 
