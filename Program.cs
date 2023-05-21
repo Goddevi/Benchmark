@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStringCalculationService, StringCalculationService>();
-builder.Services.AddScoped<ISplitter, CommaSplitter>();
 
 
 var app = builder.Build();

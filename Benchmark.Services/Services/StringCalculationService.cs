@@ -2,6 +2,7 @@
 
 using Benchmark.Services.Interfaces;
 using System.Globalization;
+using System.Runtime;
 
 namespace Benchmark.Services
 {
@@ -9,27 +10,43 @@ namespace Benchmark.Services
     
     public class StringCalculationService : IStringCalculationService
     {
-        private readonly ISplitter _splitter;
-
-        public StringCalculationService(ISplitter splitter)
+        public int Add(string numbers)
         {
-            _splitter = splitter;
+            var runningTotal = 0;
+            if (numbers == "")
+                return 0;
+
+            if (!numbers.Contains(','))
+            {
+                int.TryParse(numbers, NumberStyles.Integer, null, out runningTotal);
+                return runningTotal;
+            }
+            //max length of array ~2billion
+            var numbersArray = numbers.Split(',');
+
+            foreach (var stringNumber in numbersArray)
+            {
+                int intNumber = 0;
+                int.TryParse(stringNumber, NumberStyles.Integer, null, out intNumber);
+                runningTotal += intNumber;
+            }
+
+            return runningTotal;
         }
 
-        public int Add(string numbers)
+
+      
+        public int Add(string numbers, INumberParser numberParser)
         {
             if (string.IsNullOrWhiteSpace(numbers))
                 return 0;
 
-            var numbersArray = _splitter.Split(numbers);
+            var numbersArray = numberParser.ParseNumbers(numbers);
             var runningTotal = 0;
 
             foreach (var number in numbersArray)
-            {
-                if (int.TryParse(number, out var convertedNumber))
-                {
-                    runningTotal += convertedNumber;
-                }
+            {              
+                    runningTotal += number;  
             }
 
             return runningTotal;

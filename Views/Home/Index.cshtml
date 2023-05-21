@@ -9,7 +9,7 @@
         @using( Html.BeginForm("Index","Home",FormMethod.Post))
         {
 
-            @Html.TextBoxFor(x=>x.Input, new { @class = "form-control"});
+            @Html.TextAreaFor(x=>x.Input, new { @class = "form-control"});
             <button type="submit" class="btn btn-primary">Submit</button>
         }
     </div>

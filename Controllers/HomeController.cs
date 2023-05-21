@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Transactions;
 using Benchmark.Services;
 using Benchmark.Services.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Benchmark.Controllers
 {
@@ -28,7 +29,10 @@ namespace Benchmark.Controllers
                 return View(viewModel);
             }
 
-            viewModel.Output = _stringCalculationService.Add(viewModel.Input);
+            string sanitizedInput = Regex.Replace(viewModel.Input, "[\r]", string.Empty);
+
+            INumberParser numberParser = new CustomDelimiterNumberParser();
+           viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
 
             return View(viewModel);
         }
