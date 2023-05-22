@@ -28,11 +28,12 @@ namespace Benchmark.Controllers
             {
                 return View(viewModel);
             }
-            //have sanitized the input to convert
+            //have sanitized the input to convert return key to new line for sake of testing
+            //in future more serverside validation should be included
             string sanitizedInput = Regex.Replace(viewModel.Input, "[\r]", string.Empty);
 
             INumberParser numberParser = new MultipleCustomDelimiterNumberParser(false,false);
-           viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
+            viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
 
             return View(viewModel);
         }
