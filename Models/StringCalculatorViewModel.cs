@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Benchmark.Models
 {
     public class StringCalculatorViewModel

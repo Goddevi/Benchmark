@@ -1,13 +1,10 @@
-﻿using Benchmark.Services;
-
-using Benchmark.Services.Interfaces;
+﻿using Benchmark.Services.Interfaces;
 using System.Globalization;
-using System.Runtime;
 
 namespace Benchmark.Services
 {
 
-    
+
     public class StringCalculationService : IStringCalculationService
     {
         /// <summary>
@@ -40,7 +37,7 @@ namespace Benchmark.Services
             var runningTotal = 0;
             if (numbers == "")
                 return 0;
-            
+
             //if no comma return int of numbers if possible, else 0
             if (!numbers.Contains(','))
             {
@@ -63,8 +60,8 @@ namespace Benchmark.Services
         }
 
 
-     
+
     }
 }
 
- 
+

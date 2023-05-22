@@ -1,5 +1,5 @@
-using Benchmark.Services.Interfaces;
 using Benchmark.Services;
+using Benchmark.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

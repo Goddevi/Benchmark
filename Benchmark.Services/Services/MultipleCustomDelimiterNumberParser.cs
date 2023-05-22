@@ -1,6 +1,5 @@
 ﻿using Benchmark.Services;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 public class MultipleCustomDelimiterNumberParser : DefaultNumberParser
 {
@@ -35,15 +34,15 @@ public class MultipleCustomDelimiterNumberParser : DefaultNumberParser
             var parsedNumbers = numbersWithoutDelimiter.Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
                                           .Select(x => int.TryParse(x, NumberStyles.Integer, null, out int result) ? result : 0)
                                           .ToArray();
-            if(!_allowNegatives)
+            if (!_allowNegatives)
             {
                 HandleNegativeNumbers(parsedNumbers);
             }
-            if(!_allowLargeNumbers)
+            if (!_allowLargeNumbers)
             {
-               parsedNumbers= HandleLargeNumbers(parsedNumbers);
+                parsedNumbers = HandleLargeNumbers(parsedNumbers);
             }
-           
+
             return parsedNumbers;
         }
 

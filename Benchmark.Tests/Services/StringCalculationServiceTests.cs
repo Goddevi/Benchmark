@@ -23,7 +23,7 @@ namespace Benchmark.Tests.Services
         {
             string numbers = "";
             int expected = 0;
-          
+
 
             int result = _stringCalculationService.Add(numbers);
 
@@ -64,7 +64,7 @@ namespace Benchmark.Tests.Services
         }
 
         //For this next batch of Add() Tests we will be using Moq to Mock the Number Parser which will be tested elsewhere.
-   
+
         [TestMethod]
         public void Add_EmptyStringAndNumberParser_Should_ReturnZero()
         {
@@ -73,10 +73,10 @@ namespace Benchmark.Tests.Services
             int expected = 0;
             var numberParserMock = new Mock<INumberParser>();
             numberParserMock.Setup(parser => parser.ParseNumbers(It.IsAny<string>()))
-                            .Returns(new[] {0});
+                            .Returns(new[] { 0 });
 
             //Act
-            int result = _stringCalculationService.Add(numbers,numberParserMock.Object);
+            int result = _stringCalculationService.Add(numbers, numberParserMock.Object);
 
             //Assert
             Assert.AreEqual(expected, result);
@@ -103,7 +103,7 @@ namespace Benchmark.Tests.Services
             int expected = 15;
             var numberParserMock = new Mock<INumberParser>();
             numberParserMock.Setup(parser => parser.ParseNumbers(It.IsAny<string>()))
-                            .Returns(new[] { 1,2,3,4,5});
+                            .Returns(new[] { 1, 2, 3, 4, 5 });
 
             int result = _stringCalculationService.Add(numbers, numberParserMock.Object);
 

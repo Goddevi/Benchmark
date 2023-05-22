@@ -1,6 +1,5 @@
 ﻿using Benchmark.Services;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 public class CustomDelimiterNumberParser : DefaultNumberParser
 {
@@ -8,7 +7,7 @@ public class CustomDelimiterNumberParser : DefaultNumberParser
 
     private readonly bool _allowNegatives;
     private readonly bool _allowLargeNumbers;
-    
+
     /// <summary>
     /// CustomDelimiterNumberParser by default allows negative 
     /// values and values over a set limit
@@ -37,19 +36,19 @@ public class CustomDelimiterNumberParser : DefaultNumberParser
             string numbersWithoutDelimiter = input.Substring(delimiterEndIndex + 1);
 
             //this code remains similar, can be moved to a seperate method
-            var parsedNumbers = numbersWithoutDelimiter.Split(new string[] { delimiter}, StringSplitOptions.RemoveEmptyEntries)
+            var parsedNumbers = numbersWithoutDelimiter.Split(new string[] { delimiter }, StringSplitOptions.RemoveEmptyEntries)
                                           .Select(x => int.TryParse(x, NumberStyles.Integer, null, out int result) ? result : 0)
                                           .ToArray();
             //configuration based actions
-            if(!_allowNegatives)
+            if (!_allowNegatives)
             {
                 HandleNegativeNumbers(parsedNumbers);
             }
-            if(!_allowLargeNumbers)
+            if (!_allowLargeNumbers)
             {
-               parsedNumbers= HandleLargeNumbers(parsedNumbers);
+                parsedNumbers = HandleLargeNumbers(parsedNumbers);
             }
-           
+
             return parsedNumbers;
         }
 

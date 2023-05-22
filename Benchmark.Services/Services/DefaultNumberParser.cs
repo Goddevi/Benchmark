@@ -1,8 +1,5 @@
-﻿using Benchmark.Services;
-
-using Benchmark.Services.Interfaces;
+﻿using Benchmark.Services.Interfaces;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Benchmark.Services
 {
@@ -42,15 +39,15 @@ namespace Benchmark.Services
             }
         }
 
-       /// <summary>
-       /// method to limit size of numbers that can be added
-       /// </summary>
-       /// <param name="numbers"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// method to limit size of numbers that can be added
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         protected virtual int[] HandleLargeNumbers(int[] numbers)
         {
             //LargeNumberLimit defined at top
-            return numbers.Where(x => x <= LargeNumberLimit).ToArray(); 
+            return numbers.Where(x => x <= LargeNumberLimit).ToArray();
         }
 
         /// <summary>
@@ -64,7 +61,7 @@ namespace Benchmark.Services
         }
     }
 
-   
+
 }
 
 

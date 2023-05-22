@@ -1,9 +1,7 @@
 ﻿using Benchmark.Models;
+using Benchmark.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Transactions;
-using Benchmark.Services;
-using Benchmark.Services.Interfaces;
 using System.Text.RegularExpressions;
 
 namespace Benchmark.Controllers
@@ -18,7 +16,7 @@ namespace Benchmark.Controllers
 
         public IActionResult Index()
         {
-            StringCalculatorViewModel viewModel = new StringCalculatorViewModel { Output = null};
+            StringCalculatorViewModel viewModel = new StringCalculatorViewModel { Output = null };
             return View(viewModel);
         }
         [HttpPost]
@@ -32,12 +30,12 @@ namespace Benchmark.Controllers
             //in future more serverside validation should be included
             string sanitizedInput = Regex.Replace(viewModel.Input, "[\r]", string.Empty);
 
-            INumberParser numberParser = new MultipleCustomDelimiterNumberParser(false,false);
+            INumberParser numberParser = new MultipleCustomDelimiterNumberParser(false, false);
             viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
 
             return View(viewModel);
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -48,8 +46,8 @@ namespace Benchmark.Controllers
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
-       
 
-       
+
+
     }
 }

@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Benchmark.Services;
+﻿using Benchmark.Services;
 namespace Benchmark.Tests.Services
 {
     [TestClass]
-    public class DefaultNumberParserTests :DefaultNumberParser
+    public class DefaultNumberParserTests : DefaultNumberParser
     {
         private DefaultNumberParser _numberParser;
 
@@ -103,7 +102,7 @@ namespace Benchmark.Tests.Services
         public void HandleNegativeNumbers_NoNumbers_ThrowsNoException()
         {
             // Arrange
-            int[] numbers = {  };
+            int[] numbers = { };
             var customNumberParser = new CustomNumberParser();
 
             // Act and Assert
@@ -166,7 +165,7 @@ namespace Benchmark.Tests.Services
         {
             // Arrange
             int[] numbers = { 500, 2000, 1001, 3000, 1000 };
-            int[] expected = { 500,1000 };
+            int[] expected = { 500, 1000 };
             var customNumberParser = new CustomNumberParser();
 
             // Act

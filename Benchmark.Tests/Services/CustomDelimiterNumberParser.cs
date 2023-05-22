@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Benchmark.Services;
-using Moq;
-namespace Benchmark.Tests.Services
+﻿namespace Benchmark.Tests.Services
 {
     [TestClass]
     public class CustomDelimiterNumberParserTests
