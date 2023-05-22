@@ -13,9 +13,14 @@ namespace Benchmark.Tests.Services
             {
                 HandleNegativeNumbers(numbers);
             }
-            public int[] TestHandleNumbersGreaterThan1000(int[] numbers)
+            public int[] TestHandleLargeNumbers(int[] numbers)
             {
-               return HandleNumbersGreaterThan1000(numbers);
+                return HandleLargeNumbers(numbers);
+            }
+
+            public char[] TestHandlePotentialMultipleDelimiters(string delimiter)
+            {
+                return HandlePotentialMultipleDelimiters(delimiter);
             }
         }
 
@@ -53,7 +58,7 @@ namespace Benchmark.Tests.Services
             // Assert
             Assert.AreEqual(3, result.Length);
             Assert.AreEqual(1, result[0]);
-            Assert.AreEqual(0, result[1]); // Invalid number 'abc' is replaced with default value 0
+            Assert.AreEqual(0, result[1]); // check invalid number 'abc' is replaced with default value 0
             Assert.AreEqual(3, result[2]);
         }
 
@@ -136,7 +141,7 @@ namespace Benchmark.Tests.Services
             var customNumberParser = new CustomNumberParser();
 
             // Act
-            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+            int[] result = customNumberParser.TestHandleLargeNumbers(numbers);
 
             // Assert
             Assert.AreEqual(0, result.Length);
@@ -150,7 +155,7 @@ namespace Benchmark.Tests.Services
             var customNumberParser = new CustomNumberParser();
 
             // Act
-            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+            int[] result = customNumberParser.TestHandleLargeNumbers(numbers);
 
             // Assert
             CollectionAssert.AreEqual(numbers, result);
@@ -165,10 +170,55 @@ namespace Benchmark.Tests.Services
             var customNumberParser = new CustomNumberParser();
 
             // Act
-            int[] result = customNumberParser.TestHandleNumbersGreaterThan1000(numbers);
+            int[] result = customNumberParser.TestHandleLargeNumbers(numbers);
 
             // Assert
             CollectionAssert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void HandlePotentialMultipleDelimiters_SingleCharacter_ReturnsCharArrayWithSingleElement()
+        {
+            // Arrange
+            string delimiter = ",";
+            var parser = new CustomNumberParser();
+
+            // Act
+            char[] result = parser.TestHandlePotentialMultipleDelimiters(delimiter);
+
+            // Assert
+            Assert.AreEqual(1, result.Length);
+            Assert.AreEqual(',', result[0]);
+        }
+
+        [TestMethod]
+        public void HandlePotentialMultipleDelimiters_MultipleCharacters_ReturnsCharArrayWithAllCharacters()
+        {
+            // Arrange
+            string delimiter = ",;";
+            var parser = new CustomNumberParser();
+
+            // Act
+            char[] result = parser.TestHandlePotentialMultipleDelimiters(delimiter);
+
+            // Assert
+            Assert.AreEqual(2, result.Length);
+            Assert.AreEqual(',', result[0]);
+            Assert.AreEqual(';', result[1]);
+        }
+
+        [TestMethod]
+        public void HandlePotentialMultipleDelimiters_EmptyString_ReturnsEmptyCharArray()
+        {
+            // Arrange
+            string delimiter = "";
+            var parser = new CustomNumberParser();
+
+            // Act
+            char[] result = parser.TestHandlePotentialMultipleDelimiters(delimiter);
+
+            // Assert
+            Assert.AreEqual(0, result.Length);
         }
 
     }

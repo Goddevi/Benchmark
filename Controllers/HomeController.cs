@@ -28,10 +28,10 @@ namespace Benchmark.Controllers
             {
                 return View(viewModel);
             }
-
+            //have sanitized the input to convert
             string sanitizedInput = Regex.Replace(viewModel.Input, "[\r]", string.Empty);
 
-            INumberParser numberParser = new CustomDelimiterNumberParser(false,false);
+            INumberParser numberParser = new MultipleCustomDelimiterNumberParser(false,false);
            viewModel.Output = _stringCalculationService.Add(sanitizedInput, numberParser);
 
             return View(viewModel);
